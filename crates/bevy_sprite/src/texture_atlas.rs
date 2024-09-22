@@ -4,8 +4,48 @@ use bevy_math::{URect, UVec2};
 use bevy_reflect::{std_traits::ReflectDefault, Reflect};
 #[cfg(feature = "serialize")]
 use bevy_reflect::{ReflectDeserialize, ReflectSerialize};
+use bevy_render::render_resource::TextureFormat;
 use bevy_render::texture::Image;
 use bevy_utils::HashMap;
+
+/// Stores constraints for building a [`TextureAtlas`].
+///
+/// Generally, these are passed to a [`TextureAtlasBuilder`] to build the atlas.
+///
+/// [`TextureAtlasBuilder`]: crate::TextureAtlasBuilder
+#[cfg_attr(feature = "serialize", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "serialize", serde(default))]
+#[derive(Asset, Reflect, Debug, Copy, Clone)]
+pub struct TextureAtlasSettings {
+    /// The minimum size of the atlas in pixels, excluding [`margin`](Self::margin).
+    pub min_size: UVec2,
+    /// The maximum size of the atlas in pixels, including [`margin`](Self::margin).
+    pub max_size: UVec2,
+    /// The amount of padding in pixels to add between texture rects.
+    ///
+    /// This does not affect the margin between texture rects and the edge; that is [`margin`](Self::margin).
+    pub padding: UVec2,
+    /// The amount of margin in pixels to add around the entire atlas.
+    ///
+    /// This does not affect the padding between texture rects; that is [`padding`](Self::padding).
+    pub margin: UVec2,
+    /// Force atlas to take a specific texture format.
+    ///
+    /// By default, the atlas will use the format of the textures used to build it and fail if any of them are different.
+    /// You can use this to explicitly set the format of the atlas so the input texture formats don't matter.
+    pub convert_format: Option<TextureFormat>,
+}
+impl Default for TextureAtlasSettings {
+    fn default() -> TextureAtlasSettings {
+        TextureAtlasSettings {
+            min_size: UVec2::splat(256),
+            max_size: UVec2::splat(2048),
+            padding: UVec2::ZERO,
+            margin: UVec2::ZERO,
+            convert_format: None,
+        }
+    }
+}
 
 /// Stores a mapping from sub texture handles to the related area index.
 ///
@@ -79,8 +119,8 @@ impl TextureAtlasLayout {
 
     /// Generate a [`TextureAtlasLayout`] as a grid where each
     /// `tile_size` by `tile_size` grid-cell is one of the *section* in the
-    /// atlas. Grid cells are separated by some `padding`, and the grid starts
-    /// at `offset` pixels from the top left corner. Resulting layout is
+    /// atlas. Grid cells are separated by some `padding`, and the grid is
+    /// surrounded by `margin` pixels on all edges. Resulting layout is
     /// indexed left to right, top to bottom.
     ///
     /// # Arguments
@@ -95,10 +135,10 @@ impl TextureAtlasLayout {
         columns: u32,
         rows: u32,
         padding: Option<UVec2>,
-        offset: Option<UVec2>,
+        margin: Option<UVec2>,
     ) -> Self {
         let padding = padding.unwrap_or_default();
-        let offset = offset.unwrap_or_default();
+        let margin = margin.unwrap_or_default();
         let mut sprites = Vec::new();
         let mut current_padding = UVec2::ZERO;
 
@@ -112,7 +152,7 @@ impl TextureAtlasLayout {
                 }
 
                 let cell = UVec2::new(x, y);
-                let rect_min = (tile_size + current_padding) * cell + offset;
+                let rect_min = (tile_size + current_padding) * cell + margin;
 
                 sprites.push(URect {
                     min: rect_min,
@@ -124,7 +164,7 @@ impl TextureAtlasLayout {
         let grid_size = UVec2::new(columns, rows);
 
         Self {
-            size: ((tile_size + current_padding) * grid_size) - current_padding,
+            size: ((tile_size + padding) * grid_size).saturating_sub(padding) + margin * 2,
             textures: sprites,
         }
     }
