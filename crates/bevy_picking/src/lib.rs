@@ -166,7 +166,7 @@ use bevy_reflect::prelude::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         events::*, input::PointerInputPlugin, pointer::PointerButton, DefaultPickingPlugins,
         InteractionPlugin, Pickable, PickingPlugin,

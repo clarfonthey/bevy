@@ -61,7 +61,7 @@ pub use text2d::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{Font, JustifyText, Text, Text2dBundle, TextError, TextSection, TextStyle};
 }
 

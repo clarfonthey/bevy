@@ -35,11 +35,11 @@ pub mod systems;
 #[doc(hidden)]
 #[expect(deprecated)]
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::components::*;
 
     #[cfg(feature = "bevy-support")]
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         bundles::TransformBundle,
         commands::BuildChildrenTransformExt,

@@ -116,7 +116,7 @@ use bevy_scene::Scene;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{Gltf, GltfAssetLabel, GltfExtras};
 }
 

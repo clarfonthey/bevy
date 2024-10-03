@@ -37,7 +37,7 @@ pub use window::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         CursorEntered, CursorLeft, CursorMoved, FileDragAndDrop, Ime, MonitorSelection, Window,
         WindowMoved, WindowPlugin, WindowPosition, WindowResizeConstraints,

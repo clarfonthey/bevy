@@ -33,7 +33,7 @@ pub use terminal_ctrl_c_handler::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         app::{App, AppExit},
         main_schedule::{

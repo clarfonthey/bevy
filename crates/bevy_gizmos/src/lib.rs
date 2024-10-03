@@ -55,10 +55,7 @@ mod pipeline_3d;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[cfg(feature = "bevy_render")]
-    pub use crate::aabb::{AabbGizmoConfigGroup, ShowAabbGizmo};
-
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         config::{
             DefaultGizmoConfigGroup, GizmoConfig, GizmoConfigGroup, GizmoConfigStore,
@@ -70,7 +67,12 @@ pub mod prelude {
     };
 
     #[cfg(all(feature = "bevy_pbr", feature = "bevy_render"))]
+    #[doc(no_inline)]
     pub use crate::light::{LightGizmoColor, LightGizmoConfigGroup, ShowLightGizmo};
+
+    #[cfg(feature = "bevy_render")]
+    #[doc(no_inline)]
+    pub use crate::aabb::{AabbGizmoConfigGroup, ShowAabbGizmo};
 }
 
 use bevy_app::{App, FixedFirst, FixedLast, Last, Plugin, RunFixedMainLoop};

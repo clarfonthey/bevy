@@ -49,7 +49,7 @@ pub use sampling::ShapeSample;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         cubic_splines::{
             CubicBSpline, CubicBezier, CubicCardinalSpline, CubicCurve, CubicGenerator,
@@ -65,7 +65,7 @@ pub mod prelude {
         UVec2, UVec3, UVec4, Vec2, Vec2Swizzles, Vec3, Vec3Swizzles, Vec4, Vec4Swizzles,
     };
 
-    #[doc(hidden)]
+    #[doc(no_inline)]
     #[cfg(feature = "rand")]
     pub use crate::sampling::{FromRng, ShapeSample};
 }

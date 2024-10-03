@@ -46,7 +46,7 @@ pub mod experimental {
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         core_2d::{Camera2d, Camera2dBundle},
         core_3d::{Camera3d, Camera3dBundle},

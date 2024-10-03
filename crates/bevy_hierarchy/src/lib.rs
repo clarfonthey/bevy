@@ -75,10 +75,10 @@ pub use query_extension::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{child_builder::*, components::*, hierarchy::*, query_extension::*};
 
-    #[doc(hidden)]
+    #[doc(no_inline)]
     #[cfg(feature = "bevy_app")]
     pub use crate::{HierarchyPlugin, ValidParentCheckPlugin};
 }

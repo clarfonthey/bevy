@@ -39,8 +39,9 @@ use bevy_reflect::Reflect;
 ///
 /// This includes the most common types in this module, re-exported for your convenience.
 pub mod prelude {
-    pub use super::{ray::RayMap, HitData, PointerHits};
+    #[doc(no_inline)]
     pub use crate::{
+        backend::{ray::RayMap, HitData, PointerHits},
         pointer::{PointerId, PointerLocation},
         PickSet, Pickable,
     };

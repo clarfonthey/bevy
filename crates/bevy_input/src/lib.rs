@@ -28,7 +28,7 @@ pub use button_input::*;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         gamepad::{Gamepad, GamepadAxis, GamepadButton, GamepadSettings},
         keyboard::KeyCode,

@@ -42,7 +42,7 @@ pub use bevy_ptr as ptr;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         bundle::Bundle,
         change_detection::{DetectChanges, DetectChangesMut, Mut, Ref},
@@ -68,13 +68,13 @@ pub mod prelude {
         },
     };
 
-    #[doc(hidden)]
+    #[doc(no_inline)]
     #[cfg(feature = "bevy_reflect")]
     pub use crate::reflect::{
         AppTypeRegistry, ReflectComponent, ReflectFromWorld, ReflectResource,
     };
 
-    #[doc(hidden)]
+    #[doc(no_inline)]
     #[cfg(feature = "reflect_functions")]
     pub use crate::reflect::AppFunctionRegistry;
 }

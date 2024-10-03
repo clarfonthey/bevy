@@ -52,7 +52,7 @@ pub use futures_lite;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
         block_on,
         iter::ParallelIterator,

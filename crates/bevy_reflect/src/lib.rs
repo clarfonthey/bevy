@@ -594,16 +594,16 @@ pub mod utility;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    pub use crate::std_traits::*;
-
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use crate::{
+        std_traits::*,
         reflect_trait, FromReflect, GetField, GetPath, GetTupleStructField, PartialReflect,
         Reflect, ReflectDeserialize, ReflectFromReflect, ReflectPath, ReflectSerialize, Struct,
         TupleStruct, TypePath,
     };
 
     #[cfg(feature = "functions")]
+    #[doc(no_inline)]
     pub use crate::func::{Function, IntoFunction, IntoFunctionMut};
 }
 

@@ -114,6 +114,7 @@ mod xyza;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
+    #[doc(no_inline)]
     pub use crate::{
         color::*, color_ops::*, hsla::*, hsva::*, hwba::*, laba::*, lcha::*, linear_rgba::*,
         oklaba::*, oklcha::*, srgba::*, xyza::*,

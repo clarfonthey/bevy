@@ -46,7 +46,7 @@ use widget::UiImageSize;
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
+    #[doc(no_inline)]
     pub use {
         crate::{
             geometry::*, node_bundles::*, ui_material::*, ui_node::*, widget::Button,

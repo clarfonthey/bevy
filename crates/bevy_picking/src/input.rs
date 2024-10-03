@@ -36,6 +36,7 @@ use crate::PickSet;
 ///
 /// This includes the most common types in this module, re-exported for your convenience.
 pub mod prelude {
+    #[doc(no_inline)]
     pub use crate::input::PointerInputPlugin;
 }
 

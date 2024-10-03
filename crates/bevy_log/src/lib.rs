@@ -32,13 +32,14 @@ static GLOBAL: tracy_client::ProfiledAllocator<std::alloc::System> =
 ///
 /// This includes the most common types in this crate, re-exported for your convenience.
 pub mod prelude {
-    #[doc(hidden)]
-    pub use bevy_utils::tracing::{
-        debug, debug_span, error, error_span, info, info_span, trace, trace_span, warn, warn_span,
+    #[doc(no_inline)]
+    pub use bevy_utils::{
+        tracing::{
+            debug, debug_span, error, error_span, info, info_span, trace, trace_span, warn,
+            warn_span,
+        },
+        {debug_once, error_once, info_once, once, trace_once, warn_once},
     };
-
-    #[doc(hidden)]
-    pub use bevy_utils::{debug_once, error_once, info_once, once, trace_once, warn_once};
 }
 
 pub use bevy_utils::{
