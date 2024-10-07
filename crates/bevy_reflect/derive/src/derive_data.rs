@@ -277,7 +277,7 @@ impl<'a> ReflectDerive<'a> {
             return Ok(Self::Opaque(meta));
         }
 
-        return match &input.data {
+        match &input.data {
             Data::Struct(data) => {
                 let fields = Self::collect_struct_fields(&data.fields)?;
                 let reflect_struct = ReflectStruct {
@@ -302,7 +302,7 @@ impl<'a> ReflectDerive<'a> {
                 input.span(),
                 "reflection not supported for unions",
             )),
-        };
+        }
     }
 
     /// Set the remote type for this derived type.
@@ -489,7 +489,7 @@ impl<'a> ReflectMeta<'a> {
     }
 }
 
-impl<'a> StructField<'a> {
+impl StructField<'_> {
     /// Generates a `TokenStream` for `NamedField` or `UnnamedField` construction.
     pub fn to_info_tokens(&self, bevy_reflect_path: &Path) -> proc_macro2::TokenStream {
         let name = match &self.data.ident {
@@ -1197,7 +1197,7 @@ impl<'a> ReflectTypePath<'a> {
     }
 }
 
-impl<'a> ToTokens for ReflectTypePath<'a> {
+impl ToTokens for ReflectTypePath<'_> {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
         match self {
             Self::Internal { ident, .. } | Self::Primitive(ident) => ident.to_tokens(tokens),

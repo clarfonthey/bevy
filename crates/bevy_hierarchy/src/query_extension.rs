@@ -216,7 +216,7 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter> Iterator for DescendantIter<'w, 's, D, F>
+impl<'w, D: QueryData, F: QueryFilter> Iterator for DescendantIter<'w, '_, D, F>
 where
     D::ReadOnly: WorldQuery<Item<'w> = &'w Children>,
 {
@@ -261,7 +261,7 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter> Iterator for DescendantDepthFirstIter<'w, 's, D, F>
+impl<'w, D: QueryData, F: QueryFilter> Iterator for DescendantDepthFirstIter<'w, '_, D, F>
 where
     D::ReadOnly: WorldQuery<Item<'w> = &'w Children>,
 {
@@ -300,7 +300,7 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter> Iterator for AncestorIter<'w, 's, D, F>
+impl<'w, D: QueryData, F: QueryFilter> Iterator for AncestorIter<'w, '_, D, F>
 where
     D::ReadOnly: WorldQuery<Item<'w> = &'w Parent>,
 {

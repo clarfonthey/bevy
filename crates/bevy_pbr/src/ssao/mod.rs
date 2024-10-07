@@ -808,5 +808,5 @@ fn hilbert_index(mut x: u16, mut y: u16) -> u16 {
 
 /// Divide `numerator` by `denominator`, rounded up to the nearest multiple of `denominator`.
 fn div_ceil(numerator: u32, denominator: u32) -> u32 {
-    (numerator + denominator - 1) / denominator
+    numerator.div_ceil(denominator)
 }

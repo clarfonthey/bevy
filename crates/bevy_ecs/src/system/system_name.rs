@@ -36,21 +36,21 @@ use core::ops::Deref;
 #[derive(Debug)]
 pub struct SystemName<'s>(&'s str);
 
-impl<'s> SystemName<'s> {
+impl SystemName<'_> {
     /// Gets the name of the system.
     pub fn name(&self) -> &str {
         self.0
     }
 }
 
-impl<'s> Deref for SystemName<'s> {
+impl Deref for SystemName<'_> {
     type Target = str;
     fn deref(&self) -> &Self::Target {
         self.name()
     }
 }
 
-impl<'s> AsRef<str> for SystemName<'s> {
+impl AsRef<str> for SystemName<'_> {
     fn as_ref(&self) -> &str {
         self.name()
     }
@@ -62,7 +62,7 @@ impl<'s> From<SystemName<'s>> for &'s str {
     }
 }
 
-impl<'s> core::fmt::Display for SystemName<'s> {
+impl core::fmt::Display for SystemName<'_> {
     #[inline(always)]
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         core::fmt::Display::fmt(&self.name(), f)
@@ -90,7 +90,7 @@ unsafe impl SystemParam for SystemName<'_> {
 }
 
 // SAFETY: Only reads internal system state
-unsafe impl<'s> ReadOnlySystemParam for SystemName<'s> {}
+unsafe impl ReadOnlySystemParam for SystemName<'_> {}
 
 impl ExclusiveSystemParam for SystemName<'_> {
     type State = Cow<'static, str>;

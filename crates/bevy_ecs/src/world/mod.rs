@@ -2275,7 +2275,7 @@ impl World {
             Insert(BundleInserter<'w>, ArchetypeId),
         }
 
-        impl<'w> SpawnOrInsert<'w> {
+        impl SpawnOrInsert<'_> {
             fn entities(&mut self) -> &mut Entities {
                 match self {
                     SpawnOrInsert::Spawn(spawner) => spawner.entities(),

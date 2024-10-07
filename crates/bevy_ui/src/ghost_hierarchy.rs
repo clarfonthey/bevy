@@ -30,7 +30,7 @@ pub struct UiRootNodes<'w, 's> {
     ui_children: UiChildren<'w, 's>,
 }
 
-impl<'w, 's> UiRootNodes<'w, 's> {
+impl<'s> UiRootNodes<'_, 's> {
     pub fn iter(&'s self) -> impl Iterator<Item = Entity> + 's {
         self.root_node_query
             .iter()
@@ -108,7 +108,7 @@ pub struct UiChildrenIter<'w, 's> {
     query: &'s Query<'w, 's, (Option<&'static Children>, Option<&'static GhostNode>)>,
 }
 
-impl<'w, 's> Iterator for UiChildrenIter<'w, 's> {
+impl Iterator for UiChildrenIter<'_, '_> {
     type Item = Entity;
     fn next(&mut self) -> Option<Self::Item> {
         loop {

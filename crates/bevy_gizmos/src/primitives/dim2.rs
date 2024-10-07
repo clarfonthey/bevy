@@ -40,7 +40,7 @@ pub trait GizmoPrimitive2d<P: Primitive2d> {
 
 // direction 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Dir2> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Dir2> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -67,7 +67,7 @@ where
 
 // arc 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Arc2d> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Arc2d> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -122,7 +122,7 @@ where
 
 // circular sector 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<CircularSector> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<CircularSector> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -164,7 +164,7 @@ where
 
 // circular segment 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<CircularSegment> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<CircularSegment> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -327,7 +327,7 @@ where
 
 // rhombus 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Rhombus> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Rhombus> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -360,7 +360,7 @@ where
 
 // capsule 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Capsule2d> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Capsule2d> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -510,7 +510,7 @@ where
 
 // plane 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Plane2d> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Plane2d> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -644,8 +644,8 @@ where
 
 // polyline 2d
 
-impl<'w, 's, const N: usize, Config, Clear> GizmoPrimitive2d<Polyline2d<N>>
-    for Gizmos<'w, 's, Config, Clear>
+impl<const N: usize, Config, Clear> GizmoPrimitive2d<Polyline2d<N>>
+    for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -678,7 +678,7 @@ where
 
 // boxed polyline 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<BoxedPolyline2d> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<BoxedPolyline2d> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -711,7 +711,7 @@ where
 
 // triangle 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Triangle2d> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Triangle2d> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -738,7 +738,7 @@ where
 
 // rectangle 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<Rectangle> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<Rectangle> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -772,8 +772,8 @@ where
 
 // polygon 2d
 
-impl<'w, 's, const N: usize, Config, Clear> GizmoPrimitive2d<Polygon<N>>
-    for Gizmos<'w, 's, Config, Clear>
+impl<const N: usize, Config, Clear> GizmoPrimitive2d<Polygon<N>>
+    for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -816,7 +816,7 @@ where
 
 // boxed polygon 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<BoxedPolygon> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<BoxedPolygon> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,
@@ -857,7 +857,7 @@ where
 
 // regular polygon 2d
 
-impl<'w, 's, Config, Clear> GizmoPrimitive2d<RegularPolygon> for Gizmos<'w, 's, Config, Clear>
+impl<Config, Clear> GizmoPrimitive2d<RegularPolygon> for Gizmos<'_, '_, Config, Clear>
 where
     Config: GizmoConfigGroup,
     Clear: 'static + Send + Sync,

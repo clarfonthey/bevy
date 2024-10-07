@@ -1058,7 +1058,7 @@ impl<'w, 's, D: QueryData, F: QueryFilter> QueryIter<'w, 's, D, F> {
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter> Iterator for QueryIter<'w, 's, D, F> {
+impl<'w, D: QueryData, F: QueryFilter> Iterator for QueryIter<'w, '_, D, F> {
     type Item = D::Item<'w>;
 
     #[inline(always)]
@@ -1101,9 +1101,9 @@ impl<'w, 's, D: QueryData, F: QueryFilter> Iterator for QueryIter<'w, 's, D, F> 
 }
 
 // This is correct as [`QueryIter`] always returns `None` once exhausted.
-impl<'w, 's, D: QueryData, F: QueryFilter> FusedIterator for QueryIter<'w, 's, D, F> {}
+impl<D: QueryData, F: QueryFilter> FusedIterator for QueryIter<'_, '_, D, F> {}
 
-impl<'w, 's, D: QueryData, F: QueryFilter> Debug for QueryIter<'w, 's, D, F> {
+impl<D: QueryData, F: QueryFilter> Debug for QueryIter<'_, '_, D, F> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         f.debug_struct("QueryIter").finish()
     }
@@ -1190,8 +1190,8 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator> Iterator
-    for QuerySortedIter<'w, 's, D, F, I>
+impl<'w, D: QueryData, F: QueryFilter, I: Iterator> Iterator
+    for QuerySortedIter<'w, '_, D, F, I>
 where
     I: Iterator<Item = Entity>,
 {
@@ -1209,8 +1209,8 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator> DoubleEndedIterator
-    for QuerySortedIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: Iterator> DoubleEndedIterator
+    for QuerySortedIter<'_, '_, D, F, I>
 where
     I: DoubleEndedIterator<Item = Entity>,
 {
@@ -1222,23 +1222,23 @@ where
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator> ExactSizeIterator
-    for QuerySortedIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: Iterator> ExactSizeIterator
+    for QuerySortedIter<'_, '_, D, F, I>
 where
     I: ExactSizeIterator<Item = Entity>,
 {
 }
 
 // This is correct as [`QuerySortedIter`] returns `None` once exhausted if `entity_iter` does.
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator> FusedIterator
-    for QuerySortedIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: Iterator> FusedIterator
+    for QuerySortedIter<'_, '_, D, F, I>
 where
     I: FusedIterator<Item = Entity>,
 {
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator<Item = Entity>> Debug
-    for QuerySortedIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: Iterator<Item = Entity>> Debug
+    for QuerySortedIter<'_, '_, D, F, I>
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         f.debug_struct("QuerySortedIter").finish()
@@ -1369,8 +1369,8 @@ impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>>
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: DoubleEndedIterator<Item: Borrow<Entity>>>
-    QueryManyIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: DoubleEndedIterator<Item: Borrow<Entity>>>
+    QueryManyIter<'_, '_, D, F, I>
 {
     /// Get next result from the back of the query
     #[inline(always)]
@@ -1395,8 +1395,8 @@ impl<'w, 's, D: QueryData, F: QueryFilter, I: DoubleEndedIterator<Item: Borrow<E
     }
 }
 
-impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> Iterator
-    for QueryManyIter<'w, 's, D, F, I>
+impl<'w, D: ReadOnlyQueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> Iterator
+    for QueryManyIter<'w, '_, D, F, I>
 {
     type Item = D::Item<'w>;
 
@@ -1425,12 +1425,10 @@ impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, I: Iterator<Item: Borrow<Enti
 }
 
 impl<
-        'w,
-        's,
         D: ReadOnlyQueryData,
         F: QueryFilter,
         I: DoubleEndedIterator<Item: Borrow<Entity>>,
-    > DoubleEndedIterator for QueryManyIter<'w, 's, D, F, I>
+    > DoubleEndedIterator for QueryManyIter<'_, '_, D, F, I>
 {
     #[inline(always)]
     fn next_back(&mut self) -> Option<Self::Item> {
@@ -1452,13 +1450,13 @@ impl<
 }
 
 // This is correct as [`QueryManyIter`] always returns `None` once exhausted.
-impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> FusedIterator
-    for QueryManyIter<'w, 's, D, F, I>
+impl<D: ReadOnlyQueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> FusedIterator
+    for QueryManyIter<'_, '_, D, F, I>
 {
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> Debug
-    for QueryManyIter<'w, 's, D, F, I>
+impl<D: QueryData, F: QueryFilter, I: Iterator<Item: Borrow<Entity>>> Debug
+    for QueryManyIter<'_, '_, D, F, I>
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         f.debug_struct("QueryManyIter").finish()
@@ -1636,8 +1634,8 @@ impl<'w, 's, D: QueryData, F: QueryFilter, const K: usize> QueryCombinationIter<
 // Iterator type is intentionally implemented only for read-only access.
 // Doing so for mutable references would be unsound, because calling `next`
 // multiple times would allow multiple owned references to the same data to exist.
-impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, const K: usize> Iterator
-    for QueryCombinationIter<'w, 's, D, F, K>
+impl<'w, D: ReadOnlyQueryData, F: QueryFilter, const K: usize> Iterator
+    for QueryCombinationIter<'w, '_, D, F, K>
 {
     type Item = [D::Item<'w>; K];
 
@@ -1679,7 +1677,7 @@ impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, const K: usize> Iterator
     }
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter> ExactSizeIterator for QueryIter<'w, 's, D, F>
+impl<D: QueryData, F: QueryFilter> ExactSizeIterator for QueryIter<'_, '_, D, F>
 where
     F: ArchetypeFilter,
 {
@@ -1689,13 +1687,13 @@ where
 }
 
 // This is correct as [`QueryCombinationIter`] always returns `None` once exhausted.
-impl<'w, 's, D: ReadOnlyQueryData, F: QueryFilter, const K: usize> FusedIterator
-    for QueryCombinationIter<'w, 's, D, F, K>
+impl<D: ReadOnlyQueryData, F: QueryFilter, const K: usize> FusedIterator
+    for QueryCombinationIter<'_, '_, D, F, K>
 {
 }
 
-impl<'w, 's, D: QueryData, F: QueryFilter, const K: usize> Debug
-    for QueryCombinationIter<'w, 's, D, F, K>
+impl<D: QueryData, F: QueryFilter, const K: usize> Debug
+    for QueryCombinationIter<'_, '_, D, F, K>
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         f.debug_struct("QueryCombinationIter").finish()

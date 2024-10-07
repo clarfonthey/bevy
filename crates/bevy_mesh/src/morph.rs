@@ -225,7 +225,7 @@ impl MorphAttributes {
 
 /// Integer division rounded up.
 const fn div_ceil(lhf: u32, rhs: u32) -> u32 {
-    (lhf + rhs - 1) / rhs
+    lhf.div_ceil(rhs)
 }
 struct Rect(u32, u32);
 
