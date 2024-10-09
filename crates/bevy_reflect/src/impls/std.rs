@@ -219,9 +219,8 @@ impl_reflect_opaque!(::alloc::collections::BinaryHeap<T: Clone>);
 
 macro_rules! impl_reflect_for_atomic {
     ($ty:ty, $ordering:expr) => {
+        impl_type_path!($ty);
         const _: () = {
-            impl_type_path!($ty);
-
             #[cfg(feature = "functions")]
             crate::func::macros::impl_function_traits!($ty);
 
